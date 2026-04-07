@@ -1,9 +1,9 @@
 body{
-    background-color: rgb(209, 154, 109);
+    background-color: rgb(199, 235, 255);
 }
 
-h2{
+h1{
     font-family: Georgia, 'Times New Roman', Times, serif;
-    color:rgb(109, 71, 41);
+    color:rgb(255, 255, 255);
     text-align: center;
 }
