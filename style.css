@@ -1,9 +1,28 @@
-body{
-    background-color: rgb(199, 235, 255);
+
+body {
+    background-color: #f5e6d3; 
+    font-family: Arial;
 }
 
-h1{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    color:rgb(255, 255, 255);
+
+h1 {
     text-align: center;
 }
+
+
+form {
+    width: 300px;
+    margin: auto;
+}
+
+
+input, select, textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+button {
+    width: 100%;
+}
+
