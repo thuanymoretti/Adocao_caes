@@ -1,13 +1,12 @@
 <html lang="en">
-    
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Formulário De Adoção</title>
-        <link rel="stylesheet" href="style.css">
-        <script src="script.js"></script>
-        
-        <script src="scripts/script.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário De Adoção</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+
 </head>
 
 <body>
@@ -16,9 +15,9 @@
 
     <div class="formAdocao">
 
-        <form>
+        <form id="formAdocao">
             <label for="nome">Nome:</label>
-            <input type="text" id="nome" placeholder="Digite seu nome completo...">
+            <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo...">
             <br>
 
             <label for="email">Email:</label>
@@ -51,14 +50,14 @@
 
             <label>Possui quintal?</label>
             <div class="opcoes">
-                <label><input type="radio" name="quintal"> Sim</label>
-                <label><input type="radio" name="quintal"> Não</label>
+                <label><input type="radio" name="quintal" value="sim"> Sim</label>
+                <label><input type="radio" name="quintal" value="nao"> Não</label>
             </div>
 
             <label>Já teve pets antes?</label>
             <div class="opcoes">
-                <label><input type="radio" name="quintal"> Sim</label>
-                <label><input type="radio" name="quintal"> Não</label>
+                <label><input type="radio" name="pets" value="sim"> Sim</label>
+                <label><input type="radio" name="pets" value="nao"> Não</label>
             </div>
 
             <label for="tempo">Quantas horas o animal ficará sozinho por dia?</label>
@@ -74,12 +73,14 @@
             <label>
                 <input type="checkbox" id="termo">
                 Aceito o termo de responsabilidade
-                <button type="submit">Enviar</button>
             </label>
             <br>
+
+            <button type="submit">Enviar</button>
         </form>
 
         <div id="resultado"></div>
+
     </div>
 
     <img id="gatinho" src="assets/gif.gif" alt="gif">

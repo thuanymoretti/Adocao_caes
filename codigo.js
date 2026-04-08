@@ -1,95 +1,85 @@
-document.getElementById("formAdocao").addEventListener("submit", function (e) {
+document.getElementById("FormularioAdocao").addEventListener("submit", function (e) {
     e.preventDefault();
 
-    let nome = document.getElementById("nome").value;
-    let email = document.getElementById("email").value;
-    let telefone = document.getElementById("telefone").value;
-    let cpf = document.getElementById("cpf").value;
-    let idade = document.getElementById("idade").value;
-    let cidade = document.getElementById("cidade").value;
-    let moradia = document.getElementById("moradia").value;
+
+    let nome = document.getElementById("nome").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let cpf = document.getElementById("cpf").value.trim();
+    let telefone = document.getElementById("telefone").value.trim();
+    let idade = parseInt(document.getElementById("idade").value);
+    let cidade = document.getElementById("cidade").value.trim();
+    let lugar = document.getElementById("lugar").value;
     let quintal = document.querySelector('input[name="quintal"]:checked');
-    let pets = document.querySelector('input[name="pets"]:checked');
-    let tempo = document.getElementById("tempo").value;
-    let motivo = document.getElementById("motivo").value;
+    let pet = document.querySelector('input[name="pet"]:checked');
+    let horas = parseFloat(document.getElementById("horas").value);
+    let motivo = document.getElementById("motivo").value.trim().toLowerCase();
+    let permissao = document.getElementById("permição").checked;
+    let seguro = document.getElementById("seguro").checked;
+    let financeiro = document.getElementById("financeiro").checked;
+    let impulso = document.getElementById("impulso").value.trim().toLowerCase();
     let termo = document.getElementById("termo").checked;
 
-    let permite = document.querySelector('input[name="permite"]:checked');
-    let seguro = document.querySelector('input[name="seguro"]:checked');
-    let financeiro = document.querySelector('input[name="financeiro"]:checked');
-    let decisao = document.getElementById("decisao").value;
+    let cpfsExistentes = ["12345678900", "99999999999"];
 
-    
-    
-    if (idade < 18) {
-        alert("Precisa ter 18 anos");
-        return;
+
+    if (nome.length < 3) return alert("Nome inválido (mínimo 3 caracteres)");
+    if (!email.includes("@")) return alert("Email inválido");
+    if (cpf === "") return alert("CPF obrigatório");
+    if (cpfsExistentes.includes(cpf)) return alert("CPF já cadastrado!");
+    if (telefone.length < 8 || isNaN(telefone)) return alert("Telefone inválido");
+    if (isNaN(idade) || idade < 18) return alert("Obrigatório ter 18 anos ou mais");
+    if (cidade === "") return alert("Cidade obrigatória");
+    if (lugar === "") return alert("Selecione o tipo de moradia");
+    if (!quintal) return alert("Informe se possui quintal");
+    if (!pet) return alert("Informe se já teve pet");
+    if (isNaN(horas) || horas < 0) return alert("Horas inválidas");
+    if (motivo.length < 10) return alert("Motivo muito curto");
+    if (!termo) return alert("Você deve aceitar o termo");
+
+
+    if (lugar === "apartamento" && quintal.value === "sim") {
+        return alert("Apartamento não pode ter quintal");
     }
 
-    if (telefone.length < 8) {
-        alert("Telefone inválido");
-        return;
+    if (lugar === "apartamento" && !permissao) {
+        return alert("O apartamento deve permitir animais");
     }
 
-    if (cpf === "") {
-        alert("CPF obrigatório");
-        return;
-    }
-
-    if (cpfsCadastrados.includes(cpf)) {
-        alert("CPF já cadastrado");
-        return;
-    }
-
-    if (!termo) {
-        alert("Aceite o termo");
-        return;
-    }
-
-    
-    if (moradia === "apartamento" && !permite) {
-        alert("Informe se o local permite animais");
-        return;
-    }
-
-    if (moradia === "casa" && !seguro) {
-        alert("Informe se o quintal é seguro");
-        return;
-    }
-
-    if (moradia === "apartamento" && quintal && quintal.value === "sim") {
-        alert("Apartamento não pode ter quintal");
-        return;
-    }
-
-   
-    if (tempo > 8) {
-        alert("Animal ficará muito tempo sozinho! Justifique melhor.");
-        return;
-    }
-
-    
-    if (pets && pets.value === "nao") {
-        alert("A ONG poderá acompanhar sua adaptação com o pet");
+    if (lugar === "casa" && !seguro) {
+        return alert("Informe se o quintal é seguro");
     }
 
 
-    if (motivo === "quero" || motivo === "porque sim") {
-        alert("Motivo inválido");
-        return;
+    if (horas > 8) {
+        alert("Atenção: o animal ficará muito tempo sozinho!");
     }
 
-    
-    if (financeiro && financeiro.value === "nao") {
-        alert("Sem condições financeiras para adoção");
-        return;
+    if (pet.value === "nao") {
+        alert("A ONG poderá acompanhar sua adaptação");
     }
 
-    if (decisao === "hoje") {
-        alert("Cuidado com decisão impulsiva!");
+
+    let motivosInvalidos = ["quero", "porque sim", "porque eu quero"];
+    if (motivosInvalidos.includes(motivo)) {
+        return alert("Motivo inválido, seja mais específico");
     }
 
+
+    if (!financeiro) {
+        return alert("Sem condições financeiras para adoção");
+    }
+
+    let impulsoInvalidos = ["hoje", "ontem", "agora"];
+    if (impulsoInvalidos.includes(impulso)) {
+        alert("Cuidado: decisão impulsiva!");
+    }
 
     document.getElementById("resultado").innerHTML =
-        "Formulário enviado com sucesso!";
+        "✅ Cadastro realizado com sucesso!<br><br>" +
+        "<strong>Nome:</strong> " + nome + "<br>" +
+        "<strong>Email:</strong> " + email + "<br>" +
+        "<strong>Telefone:</strong> " + telefone + "<br>" +
+        "<strong>Cidade:</strong> " + cidade + "<br>" +
+        "<strong>Moradia:</strong> " + lugar + "<br>" +
+        "<strong>Horas sozinho:</strong> " + horas + "h";
 });

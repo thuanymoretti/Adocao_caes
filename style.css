@@ -1,7 +1,8 @@
 
 body {
     background-image: url(assets/fundo.jpg); 
-    font-family: Arial
+    font-family: Arial;
+    background-repeat: no-repeat;
 }
 
 .formAdocao {
